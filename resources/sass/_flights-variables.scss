@@ -1,0 +1,728 @@
+////
+/// all site specific colours, fonts and images
+/// NOTE: please use camel case if creating a custom variable.
+/// Variables with dashes are from plugins (bootstrap, font-awesome...)
+/// @group Site-Specific Variables
+////
+
+/// copied and unchanged from bootstrap in order to set container variables.
+/// Wasn't working without being in this file.
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+
+$site				: "flights";
+$siteUrl			: "http://www.flights.ca/";
+
+/// ======== Colours =========
+
+/// Primary Brand Colour - Orange
+/// - NOTE: We should limit the use of brand color variables in other
+/// SCSS files unless we are pretty sure a certain element will always use
+/// the primary colour (for example) because the colours will be different for every site.
+/// It's better to create a variable in this file that uses one of
+/// these colours so that it can be changed, when needed.
+/// - Variables with a dash (brand-primary) as opposed to camelCase are overriding Bootstrap variables.
+	$brand-primary					: #0074BC;
+
+/// Darker Blue
+	$brandColor2					: #29265E;
+
+/// Lighter blue (indicating "action" - used for buttons, secitons and links)
+	$brandColor3					: #2980B9;
+
+/// grey - main text colour
+	$brandColor4					: #494949;
+
+/// Red -  indicates urgency - warnings, errors, urgent messages
+	$brandColor5					: #D51532;
+
+/// Lightest blue (buttons)
+	$brandColor6					: #35a6f0;
+
+/// Bootstrap Dark Grey
+	$gray-dark						: #373a3c;
+
+///bootstrap
+	$brand-success					: #5cb85c;
+	$brand-info						: #5bc0de;
+	$brand-warning					: #f0ad4e;
+	$brand-danger					: #d9534f;
+	$brand-inverse					: $gray-dark;
+
+/// === Global ====
+	$borderColor					: #ebebeb;
+	$border-color					: #ebebeb;
+	$border							: 1px solid $borderColor;
+
+// alternate text colors	
+    $primaryColor 					: #396fc8;
+    $secondaryColor 				: #949494;
+
+
+/// Created variable for max container width for each breakpoint to use in CSS
+	$smContainerMax         		: 540px;
+	$mdContainerMax         		: 720px;
+	$lgContainerMax         		: 960px;
+	$xlContainerMax         		: 1140px;
+
+	$container-max-widths: (
+	  sm: $smContainerMax,
+	  md: $mdContainerMax ,
+	  lg: $lgContainerMax,
+	  xl: $xlContainerMax
+	) !default;
+
+	$xsGridBreak					: 0;
+	$smGridBreak					: 576px;
+	$mdGridBreak					: 768px;
+	$lgGridBreak					: 992px;
+	$xlGridBreak					: 1200px;
+
+	$grid-breakpoints: (
+	  xs: $xsGridBreak,
+	  sm: $smGridBreak,
+	  md: $mdGridBreak,
+	  lg: $lgGridBreak,
+	  xl: $xlGridBreak
+	) !default;
+
+	@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+
+/// Global background colour
+	$body-bg						: #fff;
+	$bodyBgGrey						: #f0f1f1;
+
+
+/// Search
+	$searchBgColor						: rgba(194, 214, 239, 0.5);
+	$searchBgColorSm					: transparent;
+	$searchFontFamily					: "canada-type-gibson",sans-serif;
+	$searchEngineIconFill				: #F15D54;
+	$searchEngineCheckMark				: url("https://flights-ca.s3.amazonaws.com/img/icons/icon-checkmark-black.svg");
+	$searchEngineCheckMarkMdUp			: url("https://flights-ca.s3.amazonaws.com/img/icons/icon-checkmark-black.svg");
+	$searchWidgetVerticalBtnBg 	    	: #649a42;
+	$searchTitleColorSm					: #383838;
+	$searchTitleColorActiveSm			: $brand-primary;
+	$searchIconColorSm					: #383838;
+	$searchIconColorActiveSm			: $brand-primary;
+	$searchTitleColor					: #515151;
+	$searchTitleColorActive				: $brand-primary;
+	$searchIconColor					: #515151;
+	$searchIconColorActive				: $brand-primary;
+	$searchTitleBorderColor				: $brand-primary;
+	$searchNavBgColor					: rgba(234, 239, 243, 0.5);
+	$searchNavBgActiveColor				: rgba(194, 214, 239, 0.5);
+	$searchNavShadow					: inset 0px -10px 8px -7px rgba(0,0,0,.17);
+	$searchButtonContainerBgColor		: transparent;
+	$searchCopyTextColor				: #000;
+	$searchLabelColor					: #000;
+	$searchRadioCheckboxBorderColorSm	: #606060;
+	$searchRadioCheckboxBorderColor 	: #515151;
+	$searchButtonAdvanceColor			: #000;
+	$searchAddRemoveTextSm				: #606060;
+	$searchAddRemoveText				: #000;
+	$searchMobileHeaderColor			: #0070c9;
+
+/// Search Horizontal
+	$searchHorizontalInputSelectBg	: #fff;
+	$searchHorizontalInputHeight    : 42px;
+
+///links
+
+	$link-color						: $brandColor3;
+	$link-decoration				: none;
+	$link-hover-color				: darken($link-color, 15%);
+	$link-hover-decoration			: underline;
+
+	$body-color						: $brandColor4;
+	$starRatingColor				: #f89520;
+	$loaderColor					: #000;
+	$customBulletColor				: $brandColor2;
+	$linkColorSecondary				: #414042;
+
+/// loaders
+
+	$progressBarColor				: #006ecc;
+	$progressBgColor				: #d7d9da;
+
+///header
+
+	$headerTopColor					: #FFFFFF;
+	$headerBlueBgColor				: #0074BC;
+	$headerNavColor					: #FF7900;
+	$headerNavColorSm				: #ffffff;
+	$hamburgerColor					: #0074BC;
+	$iconNavColor					: #0074bc;
+
+///footer
+	$footerBgColour					: #f5f5f5;
+	$footerTextColour				: #fff;
+	$footerLinkColour				: #5e5e5e;
+
+	$socialMediaLinkBg				: #ffb74d;
+
+///fixed scroll header
+
+	$fixedScrollHeaderActiveColor   : $brand-primary;
+
+/// === Banners ====
+	$bannerImageWidthMd				: auto;
+
+
+/// =====Bootstrap settings =====
+
+/// Enable or disable flex box on bootstrap grid
+	$enable-flex					: true;
+
+// ==== Rounded Corners
+	$border-radius					: .4rem;
+	$border-width: 1px !default;
+
+///Enable or disable rounded corners globally.
+	$enable-rounded					: true;
+
+///Enable or disable rounded corners on all buttons
+	$btnEnableRounded				: true;
+
+///Enable rounded corners on all form elements.
+/// - All Elements must use the bootstrap .form-control class for this to work.
+/// Example: &lt;input class="form-control"&gt;
+	$formEnableRounded: true;
+
+	$enable-shadows					: true;
+	$enable-gradients				: true;
+	$enable-transitions				: true;
+	$enable-hover-media-query		: true;
+	$enable-grid-classes			: true;
+	$enable-print-styles			: true;
+
+/// Price Colour 1
+	$priceColor1					: #F15D54;
+	$priceColor1Sm					: #fff;
+
+/// Price Colour 2 - Second option for price colour
+	$priceColor2					: 	$brandColor2;
+
+/// Buttons
+	$btnPrimaryColor                : #41b881;
+	$btnPrimaryBgColor				: #41b881;
+	$btnPrimaryBorder				: 1px solid transparent;
+	$btnPrimaryTextColor			: #fff;
+	$btnPrimaryBoxShadow			: none;
+	$btnPrimaryHover				: #439c72;
+	$btnPrimaryHoverBorder			: rgba(0, 0, 0, 0);
+	$btnPrimaryHoverBgColor			: #439c72;
+	$btnPrimaryHoverTextColor		: #fff;
+	$btnPrimaryBorderRadius			: $border-radius;
+
+	$btn-primary-color				: #fff;
+	$btn-primary-bg					: $brandColor5;
+	$btn-primary-border				: $btn-primary-bg;
+	$primary 						: #2980b9;
+	$secondary						: #808080;
+
+	$btnSecondaryColor              : #0070c9;
+	$btnSecondaryBgColor			: #0070c9;
+	$btnSecondaryBorder				: 0;
+	$btnSecondaryTextColor			: #fff;
+	$btnSecondaryBoxShadow			: none;
+	$btnSecondaryHover				: linear-gradient(180deg,#006ecc,#015aa7) repeat-x #015aa7;
+	$btnSecondaryHoverBorder		: rgba(0, 0, 0, 0);
+	$btnSecondaryHoverBgColor		: #0070c9;
+	$btnSecondaryHoverTextColor		: #fff;
+	$btnSecondaryActiveBgColor		: #2c5aa3;
+	$btnSecondaryBorderRadius		: $border-radius;
+
+	$btn-secondary-color			: #fff;
+	$btn-secondary-bg				: $brand-primary;
+	$btn-secondary-border			: $brand-primary;
+
+	$badge-pill-border-radius		: 3rem;
+
+	$btnFilterResultsBgImage		: none;
+	$btnFilterResultsBg				: #0070c9;
+
+	$btnEditSearchBgImage			:$btnPrimaryColor;
+	$btnEditSearchBg				:$btnPrimaryBgColor;
+
+	$btn-disabled-opacity			:1;
+	$btnDisabledBg					:#f3f3f3; 
+	$btnDisabledColor				:$brandColor4;
+
+
+/// Close Button
+
+	$btn-close-weight				: 100;
+
+/// Low Importance button gradient
+	$btnLowImportanceGradientText	: #555;
+	$btnLowImportanceGradient1		: #fff;
+	$btnLowImportanceGradient2		: #ddd;
+	$btnLowImportanceGradientBorder	: #ddd;
+
+/// button primary gradient
+	$btnPrimaryGradientText			: #fff;
+	$btnPrimaryGradient1			: #35a6f0;
+	$btnPrimaryGradient2			: #2980b9;
+	$btnPrimaryGradientBorder		: transparent;
+
+/// button secondary gradient
+	$btnSecondaryGradient1			: #ff8b03;
+	$btnSecondaryGradient2			: #ff7900;
+
+/// buttons carousel
+
+	$btnCircleCarouselColor			: rgba(255, 255, 255, 0.9);
+	$btnCircleCarouselBorder		: 1px solid #ddd;
+	$btnCircleCarouselIconFill		: #9e9e9e;
+	$btnCircleCarouselColorHover	: rgba(255, 255, 255, 1);
+	$btnCircleCarouselHover			: 1;
+
+/// load more button
+	$loadBtnText					:#000;
+	$loadBtnTextHover				:#000;	
+	$loadBtnBg						:#f8f9fa linear-gradient(180deg,#f9fafb,#f8f9fa) repeat-x;
+	$loadBtnBgHover					:#e2e6ea linear-gradient(180deg,#e6eaed,#e2e6ea) repeat-x;;
+	$loadBtnBorder 					:$border-color;
+	$loadBtnBorderHover				:#dae0e5;
+
+/// ====== Type =======
+
+	$font-family-sans-serif			: raleway, sans-serif;
+	$font-family-serif				: Georgia, "Times New Roman", Times, serif;
+	$font-family-monospace			: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	/// Set bootstrap font category
+	/// @example Options: $font-family-sans-serif. $font-family-serif, or $font-family-monospace
+	$font-family-base				: $font-family-sans-serif;
+	$font-size-base					: .875rem;
+
+	/// h1, h2, h3....
+	$font-family-headers			: canada-type-gibson, sans-serif;
+	$font-size-h1					: 2.625rem;	
+	$h1FontWeight					: 500;
+	$font-size-h2					: 2.625rem;
+	$font-size-h3					: 1.75rem;
+	$font-size-h4					: 1.5rem;
+	$font-size-h5					: 1.25rem;
+	$font-size-h6					: 1rem;
+	$font-size-sm					: 0.8125rem;
+	$font-size-xs					: 0.6875rem;
+	$headings-font-weight			: 500;
+
+/// Spacing
+	$spacer: 1rem !default;
+	$spacers: () !default;
+
+	$spacers: map-merge(
+	  (
+	    0: 0,
+	    1: ($spacer * .25),
+	    2: ($spacer * .5),
+	    3: $spacer,
+	    4: ($spacer * 1.5),
+	    5: ($spacer * 3)
+	  ),
+	  $spacers
+	);
+
+	// spacers for padding and margin
+	$spacer-0						: map-get($spacers, 0);
+	$spacer-1						: map-get($spacers, 1);
+	$spacer-2						: map-get($spacers, 2);
+	$spacer-3						: map-get($spacers, 3);
+	$spacer-4						: map-get($spacers, 4);
+	$spacer-5						: map-get($spacers, 5);
+
+/// Icons
+	$iconSize 						: $font-size-base;
+	$iconRatingColor				: #F89520;
+	$iconRatingColor2				: $brandColor2;
+	$iconEmptyStarColor 			: #d9d9d9;
+	$iconStarColor					: #f89520;
+
+/// Forms
+	$input-bg 						: #ffffff;
+	$input-color-focus				: #464a4c; //fix/
+	$input-bg-focus					: #fbfbfb; //fix/
+	$input-border-focus				: #ffbc80; //fix/
+	$input-box-shadow-focus			: inset 0 1px 1px rgba(0,0,0,.075);
+	$asterix-color					: #ca0000;
+
+// Radio
+	$radioCheckedColor				: #0070c9;
+/// Theme-2
+	$radioColor2  					: #9a9a9a;
+	$radioCheckedColor2				: #3ec758;
+
+/// Checkbox
+	$checkboxCheckedColor			: #007fc9;
+	$checkboxBorderColor			: #e8e8e8;
+/// Theme-2
+	$checkboxBgColor				: #d2dadc;
+	$checkboxCheckColor				: #000;
+
+/// Slider
+	$sliderHandleColor				: #007fc9;
+	$sliderRailBgColor				: #d5d5d5;
+	$sliderRailActiveColor			: #007fc9;	
+
+/// Input / Select Custom Icons
+
+	$iconInputChevronPaddingRight							: 	 40px;
+	$iconInputPositionRight									:    17px;
+	$iconInputPositionTop									:    15px;
+	$iconInputWidth											:    20px;
+	$iconInputHeight										:    16px;
+	$iconInputBgSize										:    16px 16px;
+	$iconInputChevronUrl									:    url(https://flights-ca.s3.amazonaws.com/img/icons/icon-chevron-down.svg) no-repeat center center;
+	$iconInputMapPinUrl										:    url(https://flights-ca.s3.amazonaws.com/img/icons/icon-calendar.svg) no-repeat center center;
+	$iconInputCalendarUrl									:    url(https://flights-ca.s3.amazonaws.com/img/icons/icon-calendar.svg) no-repeat center center;
+
+
+	// Calendar
+	$calendarDatesColorPrimary								:    #555555 !important;
+	$calendarDatesColorPrimaryShade1						:    #888888 !important;
+	$calendarDatesColorPrimaryShade2						: 	 #999999 !important;
+	$calendarDatesColorPrimaryShade3						:    #dddddd !important;
+	$calendarDatesColorPrimaryShade4						:    #e8e7e7 !important;
+	$calendarDatesColorsecondary							:    #6b6b6b !important;
+
+	$react-dates-color-primary								: 	 #555555 !default;
+	$react-dates-color-primary-shade-1						:    #888888 !default;
+	$react-dates-color-primary-shade-2						: 	 #999999 !default;
+	$react-dates-color-primary-shade-3						:    #dddddd !default;
+	$react-dates-color-primary-shade-4						:    #e8e7e7 !default;
+	$react-dates-color-secondary							:    #6b6b6b !default;
+
+// Date Picker Input field
+	$react-dates-width-input								:    227px !default;
+	// $react-dates-width-input								:    100% !default;
+	$react-dates-width-arrow								:    24px !default;
+	$react-dates-width-tooltip-arrow						:    20px !default;
+	$react-dates-width-day-picker							:    300px !default;
+	$react-dates-spacing-vertical-picker					:    72px !default;
+	$react-dates-color-primary								:    #00a699 !default;
+	$react-dates-color-primary-dark							:    #00514a !default;
+	$react-dates-color-white								:    #fff !default;
+	$react-dates-color-gray									:    #565a5c !default;
+	// $react-dates-color-gray-dark							:    darken($react-daes-color-gray, 10.5%) !default;
+	// $react-dates-color-gray-light							:    lighten(	ct-dates-color-gray, 17.8%) !default;   // #82888a
+	$react-dates-color-gray-lighter							:    #d9d9d9 !default;
+
+	$react-dates-color-border								:	 #dbdbdb !default;
+	$react-dates-color-border-light							:    #dce0e0 !default;
+	$react-dates-color-border-medium						:    #c4c4c4 !default;
+	$react-dates-color-placeholder-text						:    #999999 !default;
+	$react-dates-color-text								 	:    #333333 !default;
+	$react-dates-color-text-focus							:    #007a87 !default;
+	$react-dates-color-focus								:    #ffffff !default;
+
+// Calendar
+	$react-dates-color-primary								: 	 #555555 !default;
+	$react-dates-color-primary-shade-1						:    #888888 !default;
+	$react-dates-color-primary-shade-2						: 	 #999999 !default;
+	$react-dates-color-primary-shade-3						:    #dddddd !default;
+	$react-dates-color-primary-shade-4						:    #e8e7e7 !default;
+	$react-dates-color-secondary							:    #6b6b6b !default;
+
+// Popover
+	$popover-inner-padding               					:    1px !default;
+	$popover-bg                          					:    #fff !default;
+	$popover-max-width                   					:    276px !default;
+	$popover-border-width									:    $border-width !default;
+	$popover-border-color									:    $borderColor;
+
+	$popover-title-bg                    					:    $popover-bg !default;
+	$popover-title-padding-x             					:    14px !default;
+	$popover-title-padding-y             					:    8px !default;
+
+	$popover-content-padding-x								:    14px !default;
+	$popover-content-padding-y								:    9px !default;
+
+	$popover-body-padding-x           						:    14px !default;
+	$popover-body-padding-y           						:    9px !default;
+
+	$popover-arrow-width                 					:    10px !default;
+	$popover-arrow-color                 					:    $popover-bg !default;
+
+	$popover-arrow-outer-width:           ($popover-arrow-width + 1px) !default;
+	$popover-arrow-outer-color:           fade-in($popover-border-color, .05) !default;
+
+
+// two toned bar
+	$twoTonedBarFiller				: #A6CE39;
+
+
+// points highlight
+	$pointsHighlightText									: #ff1744;
+
+
+/// Icons
+	$searchIconColour				: $brand-primary;
+
+/// Breadcrumb
+	$breadcrumb-divider 			: ""; //text character divider. example: "/"
+	$breadcrumbDividerSvg 			: "https://s3.amazonaws.com/itravel2000/img/icons/icon-chevron-right.svg";
+	$breadcrumbDividerOpacity		: .4;
+	$breadcrumb-item-padding		: 1.3rem;
+	$breadcrumb-bg					: #transparent;
+	$breadcrumbLinkColor			: #5e5e5e;
+	$breadcrumb-active-color		: #aaa;
+	$breadcrumb-padding-x			: 0;
+	$breadcrumbFontSize				: 0.875rem;
+	$breadcrumbTextTransform		: none;
+	$breadcrumbFontWeight			: 400;
+
+// results steps
+	$resultsStepsActiveColor			: $brand-primary;
+	$resultsStepsCheckColor				: $brand-primary;
+
+/// Lists
+	$listDivider					: "•"; //text character divider. example: "/"
+	$suitcaseIconUrl				: none;
+	$planeIconUrl					: none;
+	$chevronRightGreyIconUrl		: none;
+	$listLinkColor 					: #5e5e5e;
+
+/// Gradient box
+	$gbFirstColor				: #f1f1f1;
+	$gbSecondColor				: #fff;
+
+// modals
+
+	$modal-solid-header-bar-color1		: #0074BC;
+	$modal-solid-header-bar-color2		: #0074BC;
+	$modal-spaces-icon-color			: $brand-primary;
+	$modalSessionExpireIconColor		: $brand-primary;
+
+/// ====== Site Specific Images =======
+
+/// site image folder path
+///@todo Update to new structure
+	$siteImg						: #{"/assets/"}#{$site}#{"/img/"};
+
+// Section for html snippets
+
+	$introFontFamily					: roboto,sans-serif;
+	$introFontColor						: #000;
+	$introFontSizeXs					: 1.6rem;
+	$introFontSizeSm					: 1.9rem;
+	$introFontSizeMd					: 3rem;
+	$introFontWeight					: 300;
+	$introLineHeightXs					: 2.1rem;
+	$introLineHeightSm					: 2.45rem;
+	$introLineHeightMd					: 3.85rem;
+	$introParagraphWidth				: 860px;
+	$introParagraphFontWeight			: 300;
+	$introParagraphFontSizeXs			: 1rem;
+	$introParagraphFontSizeSm			: 1rem;
+	$introParagraphFontSizeMd			: 1rem;
+	$introParagraphColor				: #999;
+	$introParagraphLineHeightXs			: 1.4rem;
+	$introParagraphLineHeightSm			: 1.45rem;
+	$introParagraphLineHeightMd			: 1.7rem;
+
+
+
+// ====== SEARCH RESULTS =====
+
+// Compare Travel Dates
+	$compareTravelDatesLinkColor		: #0070c9;
+	$compareTravelDatesCheapestColor 	: $brand-primary;
+	$cdtActiveBg1						: #0070c9;
+	$cdtActiveBg2						: #0070c9;
+	$compareTravelDatesCheapestText 	: "cheapest";
+	$compareTravelDatesCheapestTextFr 	: "moins cher";
+
+// Compare Prices
+	$compareTravelDatesLinkColor			: $link-color;
+	$compareTravelDatesCheapestColor 		: #F15D54;
+	$cdtActiveBg1							: #0074BC;
+	$cdtActiveBg2							: #0074BC;
+	$priceFinderHeaderColor					: $brand-primary;
+	$priceFinderHeaderBorder				: $brand-primary;
+	$priceFinderPriceColor					: $brand-primary;
+	$priceFinderPriceHighlight1				: #ff8b03;
+	$priceFinderPriceHighlight2				: #ff7900;
+	$priceFinderLowestPriceColor			: $brand-primary;
+	$priceFinderLowestPriceBg1				: #ff8b03;
+	$priceFinderLowestPriceBg2				: #ff7900;
+	$priceFinderDateActiveBg				: #e3f2fd;
+	$priceFinderDateActiveBd				: #90caf9;
+
+// Results Filters
+	$ResultsFiltersHeaderBgLg1			: #EFECEA;
+	$ResultsFiltersHeaderBgLg2			: #EFECEA;
+	$ResultsFiltersHeaderBd				: #e2e2e2;
+	$resultsFiltersHeaderColor			: #4F5252;
+	$resultsFiltersIconFill				: #4F5252;
+	$resultsFiltersModalHeaderWeight	: bold;
+	$inputCheckedBgColor				: #0174bc;
+
+// Vactation Product Component
+
+	$productTitleColorSm				: #ffffff;
+	$productTitleColor					: #333333;
+	$productCityColorSm					: #424242;
+	$productCityColor					: #616161;
+	$productMealTypeColorSm				: #424242;
+	$productMealTypeColor				: #0070c9;
+	$productRoomTypeColorSm				: #424242;
+	$productRoomTypeColor				: #0070c9;
+	$productDateColorSm					: #424242;
+	$productDateColor					: #616161;
+	$productTaxColor					: #999999;
+	$productWasPriceColor				: #999999;
+	$productSavePriceColor				: #ff1744;
+	$productTitleWeightMd				: bold;
+	$productMoreOptionsIconBg			: transparent;
+	$productMoreOptionsIconColor		: #0070c9;
+	$productMoreOptionsIconBorder		: 1px solid #0070c9;
+	$monthlyPriceColor					: #1c75bc;
+
+
+// Auto Complete
+
+	$autoCompleteColor					: #5e5e5e;
+	$autoCompleteIconColor				: #d9d9d9;
+	$autoCompleteActiveColor			: $brandColor3;
+	$autoCompleteActiveIcon				: $brand-primary;
+	$autoCompleteActiveBg				: #eef6fb;
+	$autoCompleteIconHeight				: 1rem;
+	$autoCompleteIconwidth				: 1rem;
+	$autoCompleteTextSize				: 1.4rem;
+	$autoCompleteTextSizeSecondary 		: 1rem;
+
+
+// Hotel Details
+	$mapsListHeaderColor				: $brand-primary;
+	$sidebarMapPinColor					: $brand-primary;
+	$attractionTitleUnderlineColor		: $brand-primary;
+	$headerBarForegroundColor			: $brand-primary;
+	$featureBadgeColor1					: $brand-primary;
+	$featureBadgeColor2					: $brand-primary;
+	$priceCalendarCheapestColor			: $brand-primary;
+	$priceCalendarHoverColor			: #0c5b97;
+	$packageOptionsDaysColor			: $brand-primary;
+
+	$hotelDetailsActiveTabBgImage 		:linear-gradient(to right, #206a9a, #2980b9);
+	$hotelDetailsActiveTabBgColor		:#206a9a;
+	$hotelDetailsH1StyleBorderColor		:#000;
+	$hotelDetailsFeatureIconPosition	:5px;
+
+//Hotel Ratings
+	$hotelRatingExcellent				: #008a06;
+	$hotelRatingGood 					: #1d50b3;
+	$hotelRatingOkay 					: #fd9b00;
+
+// Vacations flight details
+	$vacationsFlightDetailsDateColor		: $brand-primary;
+
+// Flight elements
+	$flightAirportCode						:  #0073bc;
+	$flightProductBorderColor				:  #e2e2e2;
+	$flightPriceTotal	 					:  $body-color;
+	$flightPriceFontWeight 					:  500;
+	$flightDetailsBtnColor  				:  #0076C5;
+	$flightDetailsBtnIcon				 	:  #5E5E5E;
+	$flightProductComponentRadius 			:  $border-radius;
+	
+// Recent Search Componenet
+
+	$recentSeachTitleColor					:  #212121;
+
+// Lowest Price Calendar Hotel Index Page
+
+	$priceCalendarHeaderColor				:  #2980b9;
+
+// Promo Seat Selection
+
+	$promoSeatSelectionColor				:  #6a9b3c;
+	$promoSeatSelectionIconColor			:  #6a9b3c;
+
+// Promo Shuttle
+
+	$promoShuttleColor						:  #6a9b3c;
+	$promoShuttleIconColor					:  #6a9b3c;
+	$promoShuttleNotIncludedColor			:  #CA0000;
+
+// Deposit Available
+
+	$depositAvailableColor					:  #f05a28;
+	$depositAvailableIconColor				:  #f05a28;
+
+// Tab elements
+
+	$activeArrowTextColor					: #212121;
+	$activeArrowTextWeight					: 500;
+	$activeArrowActiveTextWeight			: 500;
+	$activeArrowActiveTextColor				: #fff;
+	$activeArrowBgColor						: #ffffff;
+	$activeArrowBgColorHover        		: #006ecc;
+	$activeArrowActiveBgColor				: #006ecc;
+
+	$activeArrow2ActiveBorderTopColor		:#2980b9;
+	$activeArrow2TabFontWeight				:bold;
+
+	$activeArrowFontSizeFR					:inherit;
+	$activeArrowFontSizeSmallFR 			:inherit;
+
+	$pilltabsBgColor						:#206a9a;
+	$pilltabsBgImage						:linear-gradient(to right, #206a9a, #2980b9);
+
+	$tabsHighlightTopColor					: #2f76c5;
+	$tabsHighlightTopBorderColor			: #eaeaea;
+
+// Carousel (Tall Card)
+
+	$carouselTallCardSecondaryInfoBg			: #ffff00;
+	$carouselTallCardSecondaryTitleBg			: #ffeb00;
+	$carouselTallCardSecondaryFontColor			: #000000;
+	$carouselTallCardSecondaryTitleFontColor	: #4a4a4a;
+	$carouselTallCardSecondaryTextLgFf			:'Oswald', sans-serif;
+	$carouselTallCardSecondaryTextLgSize 		: 2.7rem;
+	$carouselTallCardSecondaryTextLgWeight 		: bold;
+
+// Promotion Long Horizontal
+
+	$promotionLongHorizontalFeaturedPromoBg		: #ffff00;
+	$promotionLongHorizontalFeaturedPromoColor	: $gray-dark;
+	$promotionLongHorizontalTheTitle			:'Oswald', sans-serif;
+
+// Newsletter Signup
+
+		$formNewsletterBg	: #f5f5f5;
+
+// Quick Links (Text links)
+
+	$subFooterQuickLinksSectionTitleFf 			:'Oswald', sans-serif;
+
+// Insurance Module on booking page
+
+	$insuranceRecomendedColor						: #226DF1;
+	$bookingInsurancePriceColor					: #000;
+
+// Best Price Calendar
+	$bestPriceCalendarDayHeadBgColor		: #006ecc;
+
+//Price Matrix
+
+	$priceMatrixIntroTextFontSize				:.845rem;
+
+/// Payment Page
+	$paymentMobilePrice							:#1c75bc;
